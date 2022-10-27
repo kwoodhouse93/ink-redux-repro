@@ -1,31 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Text } from 'ink'
-import { useClient } from 'hooks/useClient'
+import usePing from 'hooks/usePing'
 
 const Ping = () => {
-  const client = useClient()
+  const ping = usePing()
 
-  const [doPing, setDoPing] = useState(true)
-  const [ping, setPing] = useState(0)
-
-  useEffect(() => {
-    if (!doPing) return
-    setDoPing(false)
-
-    const start = new Date()
-    client.get('/ping')
-      .then((response: any) => response.data)
-      .then((d: any) => {
-        if (d === 'pong') {
-          const end = new Date()
-          setPing(end.getTime() - start.getTime())
-        }
-      })
-
-    setTimeout(() => {
-      setDoPing(true)
-    }, 1000)
-  }, [doPing])
+  if (ping === -1) {
+    return <Text color='red'>
+      Connection lost
+    </Text>
+  }
 
   const color = ping < 100 ? 'green' : ping < 200 ? 'yellow' : 'red'
 

@@ -7,6 +7,15 @@
 		"module": "CommonJS",
 		"outDir": "dist",
 		"strict": true,
+		"typeRoots": [
+			"./node_modules/@types",
+			"./declarations",
+		],
+		"paths": {
+			"ink-redux": [
+				"../declarations/ink-redux"
+			]
+		}
 	},
 	"include": [
 		"src/**/*",
