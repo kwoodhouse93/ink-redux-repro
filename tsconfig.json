@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "src/",
+		"esModuleInterop": true,
+		"jsx": "react",
+		"module": "CommonJS",
+		"outDir": "dist",
+		"strict": true,
+	},
+	"include": [
+		"src/**/*",
+	],
+	"ts-node": {
+		"require": [
+			"tsconfig-paths/register"
+		]
+	}
+}

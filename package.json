@@ -1,0 +1,34 @@
+{
+	"name": "nav-battle-cli",
+	"version": "0.0.0",
+	"license": "UNLICENSED",
+	"bin": "dist/cli.js",
+	"type": "commonjs",
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"dev": "nodemon",
+		"start": "ts-node src/cli.tsx"
+	},
+	"files": [
+		"dist/cli.js"
+	],
+	"dependencies": {
+		"axios": "^1.1.3",
+		"ink": "^3.2.0",
+		"meow": "^9.0.0",
+		"react": "^17.0.2"
+	},
+	"devDependencies": {
+		"@types/node": "^18.11.7",
+		"@types/react": "^18.0.23",
+		"eslint-plugin-react": "^7.31.10",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"ink-testing-library": "^2.1.0",
+		"nodemon": "^2.0.20",
+		"ts-node": "^10.9.1",
+		"tsconfig-paths": "^4.1.0",
+		"typescript": "^4.8.4"
+	}
+}
