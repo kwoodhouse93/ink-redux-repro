@@ -4,17 +4,13 @@ import { useGetQuery } from './api/apiSlice'
 import Spinner from 'ink-spinner'
 
 const Fetcher = () => {
-  const { data, error, isLoading } = useGetQuery()
+  const { data, isLoading } = useGetQuery()
 
   if (isLoading) {
     return <Box>
       <Spinner />
       <Text> Loading...</Text>
     </Box>
-  }
-
-  if (error) {
-    return <Text>{error.toString()}</Text>
   }
 
   return <Text>

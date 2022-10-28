@@ -1,15 +1,22 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-const serverHost = 'http://localhost:8080'
+import { createApi } from '@reduxjs/toolkit/query/react'
 
-type Response = {
+type MyResp = {
   ok: boolean
 }
 
+const customBaseQuery = () => {
+  return { data: { ok: true } }
+}
+
 export const apiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: serverHost }),
+  baseQuery: customBaseQuery,
   endpoints: builder => ({
-    get: builder.query<Response, void>({
+    get: builder.query<MyResp, void>({
       query: () => '/endpoint',
+      transformResponse: (response: MyResp) => {
+        console.log(response)
+        return response
+      },
     })
   })
 })
