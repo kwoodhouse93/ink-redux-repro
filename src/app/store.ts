@@ -1,11 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import lobbiesReducer from 'features/lobbies/lobbiesSlice'
 import { apiSlice } from 'features/api/apiSlice'
 
 const store = configureStore({
   reducer: {
     // feature: featureReducer,
-    lobbies: lobbiesReducer,
     [apiSlice.reducerPath]: apiSlice.reducer
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)

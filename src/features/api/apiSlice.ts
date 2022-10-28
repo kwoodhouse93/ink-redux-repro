@@ -1,51 +1,18 @@
-import { BaseQueryFn, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import axios, { AxiosError, AxiosRequestConfig } from 'axios'
-import { Lobby } from 'features/lobbies/types'
-
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 const serverHost = 'http://localhost:8080'
 
-const axiosBaseQuery = (
-  { baseUrl }: { baseUrl: string } = { baseUrl: '' }
-): BaseQueryFn<
-  {
-    url: string
-    method: AxiosRequestConfig['method']
-    data?: AxiosRequestConfig['data']
-    params?: AxiosRequestConfig['params']
-  },
-  unknown,
-  unknown
-> =>
-  async ({ url, method, data, params }) => {
-    try {
-      const result = await axios({ url: baseUrl + url, method, data, params })
-      return { data: result.data }
-    } catch (axiosError) {
-      let err = axiosError as AxiosError
-      return {
-        error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
-        },
-      }
-    }
-  }
+type Response = {
+  ok: boolean
+}
 
 export const apiSlice = createApi({
-  baseQuery: axiosBaseQuery({ baseUrl: serverHost }),
+  baseQuery: fetchBaseQuery({ baseUrl: serverHost }),
   endpoints: builder => ({
-    getLobbies: builder.query<Lobby[], void>({
-      query: () => ({ url: '/lobbies', method: 'GET' }),
-      onQueryStarted: (args, { dispatch, queryFulfilled }) => {
-        console.log('getLobbies started')
-      },
-      transformResponse: (response: { lobbies: Lobby[] }) => {
-        console.log('getLobbies response: ', response)
-        return response.lobbies.map(r => ({ ...r, maxPlayers: 2 }))
-      },
+    get: builder.query<Response, void>({
+      query: () => '/endpoint',
     })
   })
 })
 
 // Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetLobbiesQuery } = apiSlice
+export const { useGetQuery } = apiSlice
