@@ -13,10 +13,6 @@ export const apiSlice = createApi({
   endpoints: builder => ({
     get: builder.query<MyResp, void>({
       query: () => '/endpoint',
-      transformResponse: (response: MyResp) => {
-        console.log(response)
-        return response
-      },
     })
   })
 })
